@@ -44,24 +44,26 @@ export const EditEmployee = ({ data, handleBackBtnClick, handleUpdateClick }: Pr
   }
 
   return (
-    <div className={styles["form-container"]}>
+    <div className={styles.container}>
       <div>
         <h3>Edit employee</h3>
       </div>
       <form onSubmit={handleSubmitBtnClick}>
-        <div>
-          <label htmlFor="">First Name: </label>
-          <input type="text" value={firstName} onChange={handleFirstNameChange} />
-        </div>
-        <div>
-          <label htmlFor="">Last Name: </label>
-          <input type="text" value={lastName} onChange={handleLastNameChange} />
-        </div>
-        <div>
-          <label htmlFor="">Email add.: </label>
-          <input type="email" value={email} onChange={handleEmail} />
-        </div>
-        <div>
+        <div className={styles["form-container"]}>
+          <div>
+            <label htmlFor="">First Name: </label>
+            <input type="text" value={firstName} onChange={handleFirstNameChange} />
+          </div>
+          <div>
+            <label htmlFor="">Last Name: </label>
+            <input type="text" value={lastName} onChange={handleLastNameChange} />
+          </div>
+          <div>
+            <label htmlFor="">Email add: </label>
+            <input type="email" value={email} onChange={handleEmail} />
+          </div>
+          <div>
+          </div>
           <input type="button" value="back" onClick={handleBackBtnClick} />
           <input type="submit" value="Confirm updates" />
         </div>

@@ -1,13 +1,16 @@
-import { useState } from 'react'
 import { Home } from './components/Home'
 import "./global.css"
+import styles from "./App.module.css"
+import { Header } from './components/Header'
 
 export const App = () => {
-  const [count, setCount] = useState(0)
 
   return (
     <div>
-      <Home />
+      <Header />
+      <div className={styles.wrapper}>
+        <Home />
+      </div>
     </div>
   )
 }

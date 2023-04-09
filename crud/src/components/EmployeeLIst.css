@@ -4,6 +4,27 @@ table {
     width: 100%;
 }
 
+.header {
+    display: grid;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.header .addEmployeeBtn ,h3 {
+    grid-column-start: 1;
+    grid-row-start: 1;
+}
+
+.header .addEmployeeBtn {
+    justify-self: right;
+    z-index: 1;
+}
+
+article {
+    display: block;
+    word-break: break-all;
+}
+
 td,
 th {
     border: 1px solid #dddddd;

@@ -5,10 +5,11 @@ import { EmployeeModal } from "./EmployeeModal";
 type Props = {
     list: IEmployee[];
     handleDeleteClick: (data: IEmployee) => void;
-    onEdit: (data: IEmployee) => void
+    onEdit: (data: IEmployee) => void,
+    addEmployeeBtn: () => void
 }
 
-export const EmployeeLIst = ({ list, handleDeleteClick, onEdit }: Props) => {
+export const EmployeeLIst = ({ list, handleDeleteClick, onEdit, addEmployeeBtn }: Props) => {
     const [showModal, setShowModal] = useState(false)
     const [dataToShow, setDataToShow] = useState(null as IEmployee | null)
 
@@ -22,9 +23,14 @@ export const EmployeeLIst = ({ list, handleDeleteClick, onEdit }: Props) => {
     }
 
     return (
-        <div>
+        <div className="employeeList">
             <article>
-                <h3 className="list-header ">Employee List</h3>
+                <header className="header">
+                    <div className="addEmployeeBtn">
+                        <input type="button" value="Add Employee" onClick={addEmployeeBtn} />
+                    </div>
+                    <h3 className="list-header ">Employee List</h3>
+                </header>
                 <table>
                     <thead>
                         <tr>

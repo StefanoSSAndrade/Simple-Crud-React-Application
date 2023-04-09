@@ -1,16 +1,22 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import styles from "./Home.module.css"
-import { IEmployee, PageEnum, stevonEmployeeList } from "./Employees.type";
+import { IEmployee, PageEnum } from "./Employees.type";
 import { EmployeeLIst } from "./EmployeeLIst";
 import { Addemployee } from "./Addemployee";
 import { EditEmployee } from "./EditEmployee";
 
 export const Home = () => {
 
-    const [employeeList, setEmployeeList] = useState(stevonEmployeeList as IEmployee[]);
+    const [employeeList, setEmployeeList] = useState([] as IEmployee[]);
     const [shownPage, setShownPage] = useState(PageEnum.list)
-    // const [dataToEdit, setDataToEdit] = useState({} as IEmployee)
     const [dataToEdit, setDataToEdit] = useState({} as IEmployee)
+
+    useEffect(() => {
+        const listInString = window.localStorage.getItem("EmployeeList")
+        if (listInString) {
+            setEmployeeList(JSON.parse(listInString))
+        }
+    }, [])
 
     const handleAddEmployeeClick = () => {
         setShownPage(PageEnum.add)
@@ -20,15 +26,20 @@ export const Home = () => {
         setShownPage(PageEnum.list)
     }
 
+    const _setEmployeeList = (list: IEmployee[]) => {
+        setEmployeeList(list)
+        window.localStorage.setItem("EmployeeList", JSON.stringify(list))
+    }
+
     const addEmployee = (data: IEmployee) => [
-        setEmployeeList([...employeeList, data])
+        _setEmployeeList([...employeeList, data])
     ]
 
     const deleteEmployee = (data: IEmployee) => {
         const indexToDelete = employeeList.indexOf(data);
         const tempList = [...employeeList];
         tempList.splice(indexToDelete, 1)
-        setEmployeeList(tempList);
+        _setEmployeeList(tempList);
     }
 
     const editEmployeeData = (data: IEmployee) => {
@@ -47,21 +58,15 @@ export const Home = () => {
     return (
         <>
             <article className={styles['article-header']}>
-                <header>
-                    <h1>React : Simple Crud Application</h1>
-                </header>
             </article>
-
             <section className={styles['section-content']}>
                 {shownPage === PageEnum.list && (
                     <>
-                        <input
-                            type="button" value="Add Employee" onClick={handleAddEmployeeClick}
-                            className={styles["add-employee"]} />
                         <EmployeeLIst
                             list={employeeList}
                             handleDeleteClick={deleteEmployee}
-                            onEdit={editEmployeeData} />
+                            onEdit={editEmployeeData} 
+                            addEmployeeBtn={handleAddEmployeeClick}/>
                     </>
                 )}
 

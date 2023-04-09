@@ -1,0 +1,10 @@
+@media (max-width: 768px) {
+    html {
+        font-size: 100%;
+    }
+
+    article td,
+    th {
+        padding: 0;
+    }
+}
